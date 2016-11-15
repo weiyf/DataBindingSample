@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+
+    <!--使用data标签的class属性来重命名Binding类或者决定其放置的包的位置-->
+
+    <data class="GettingStartedBinding">
+
+        <!--layout中所用到的变量-->
+
+        <variable
+            name="user"
+            type="cn.weiyf.databindingsample.entity.User"/>
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:layout_margin="@dimen/activity_horizontal_margin"
+                  android:orientation="vertical">
+
+        <!--绑定变量的属性值-->
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{user.firstName}"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{user.lastName}"/>
+
+
+    </LinearLayout>
+
+</layout>
