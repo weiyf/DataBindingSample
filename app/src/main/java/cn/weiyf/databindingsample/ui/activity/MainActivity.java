@@ -72,9 +72,9 @@ public class MainActivity extends BaseActivity {
                 showHideFragment(mFragments[0], mFragments[1]);
             } else if (id == R.id.basic_usage) {
                 showHideFragment(mFragments[1], mFragments[0]);
-            } else if (id == R.id.nav_slideshow) {
+            } else if (id == R.id.advanced_usage) {
 
-            } else if (id == R.id.nav_manage) {
+            } else if (id == R.id.actual_combat) {
 
             }
 

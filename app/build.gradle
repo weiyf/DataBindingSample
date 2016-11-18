@@ -31,4 +31,5 @@ dependencies {
     })
     testCompile 'junit:junit:4.12'
     compile 'com.github.weiyf:DLFrame:1.0.06'
+
 }

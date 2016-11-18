@@ -35,7 +35,7 @@ public class GettingStartedFragment extends BaseFragment {
 
     @Override
     protected void initViews(@Nullable Bundle bundle) {
-        mGettingStartedBinding.setUser(new User("firstName", "lastName"));
+        mGettingStartedBinding.setUser(new User("firstName", "lastName", 16));
 //        or
 //        mGettingStartedBinding.setVariable(BR.user, new User("firstName", "lastName"));
     }

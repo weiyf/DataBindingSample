@@ -9,11 +9,11 @@
             android:id="@+id/basic_usage"
             android:title="Basic usage"/>
         <item
-            android:id="@+id/nav_slideshow"
-            android:title="Slideshow"/>
+            android:id="@+id/advanced_usage"
+            android:title="Advanced usage"/>
         <item
-            android:id="@+id/nav_manage"
-            android:title="Tools"/>
+            android:id="@+id/actual_combat"
+            android:title="actual combat"/>
     </group>
 
 

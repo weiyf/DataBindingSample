@@ -8,14 +8,13 @@ import android.view.ViewGroup;
 
 import cn.weiyf.databindingsample.base.BaseFragment;
 import cn.weiyf.databindingsample.databinding.FragmentBasicUsageBinding;
-
-/**
- * Created by weiyf on 16-11-15.
- */
+import cn.weiyf.databindingsample.entity.User;
 
 public class BasicUsageFragment extends BaseFragment {
 
     private FragmentBasicUsageBinding mBasicUsageBinding;
+
+    private Presenter mPresenter;
 
     public static BasicUsageFragment newInstance() {
 
@@ -35,5 +34,29 @@ public class BasicUsageFragment extends BaseFragment {
 
     @Override
     protected void initViews(@Nullable Bundle bundle) {
+        mPresenter = new Presenter();
+        mPresenter.mUser = new User("firstName", "lastName", 16);
+        mBasicUsageBinding.setUser(mPresenter.mUser);
+        mBasicUsageBinding.setPresenter(mPresenter);
+    }
+
+    public class Presenter {
+
+        private User mUser;
+
+        public void onFirstNameChanged(CharSequence s, int start, int before, int count) {
+            mBasicUsageBinding.watcher.setText("firstName: " + s + "\nstart: " + start +
+                    "\nbefore: " + before + "\ncount: " + count);
+        }
+
+        public void changedFirstName(View view) {
+            mUser.setFirstName("改名字怎么了");
+            showToast("点击事件, \nuser： " + mBasicUsageBinding.getUser().toString());
+        }
+
+        public void printUser(User user) {
+            showToast(user.toString());
+        }
+
     }
 }

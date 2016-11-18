@@ -1,18 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <!--如果用到某个类的变量或者静态方法，需要手动导包，可以像java一样使用类中的变量或者静态方法-->
+        <!--与java一样，java.lang.*不需要进行导包-->
+
+        <import type="android.view.View"/>
+
+        <import type="cn.weiyf.databindingsample.utils.CommonUtils"/>
+
+        <!--此两个导包没有实际意义-->
+        <!--当类名冲突时，可以使用import标签的alias属性-->
+
+        <import
+            alias="User1"
+            type="cn.weiyf.databindingsample.entity.User"/>
+
+        <import
+            alias="User2"
+            type="cn.weiyf.databindingsample.utils.entity.User"/>
+
+        <variable
+            name="user"
+            type="cn.weiyf.databindingsample.entity.User"/>
+
+        <!--此两变量无实际意义-->
+        <!--与java一样，导包之后可以直接使用，type不需要写完整包名-->
+
+        <variable
+            name="user1"
+            type="User1"/>
+
+        <variable
+            name="user2"
+            type="User2"/>
+
+        <variable
+            name="presenter"
+            type="cn.weiyf.databindingsample.ui.fragment.BasicUsageFragment.Presenter"/>
+    </data>
 
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="vertical">
+
+        <!--方法引用-->
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onTextChanged="@{presenter.onFirstNameChanged}"
+            android:text="@={user.firstName}"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@={user.lastName}"/>
+
+        <!--方法引用-->
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{presenter.changedFirstName}"
+            android:text="点击改变User的firstName"/>
+
+        <!--监听器绑定-->
+        <!--表达式中调用静态方法-->
 
         <TextView
+            android:id="@+id/watcher"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="fragment_basic_usage"/>
+            android:onClick="@{() -> presenter.printUser(user)}"
+            android:text="@{CommonUtils.toUpperCase(user.toString())}"
+            android:visibility="@{(user.firstName.length() == 0 || user.lastName.length() == 0) ? View.INVISIBLE : View.VISIBLE}"
+            />
 
-    </RelativeLayout>
+        <!--往include layout中传递变量-->
+
+        <include
+            layout="@layout/view_basic_usage_inner"
+            bind:user="@{user}"/>
+
+        <!--表达式语言演示-->
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text='@{"1 + 1 = " + String.valueOf(1 + 1)}'
+            />
+
+
+        <!--空操作符演示-->
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{user.firstName ?? user.lastName}"/>
+
+        <!--避免空指针演示-->
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{String.valueOf(user1.age)}"/>
+
+        <!--Data Binding不允许include一个使用merge标签作为跟布局的layout-->
+        <!--Error:Data binding does not support include elements as direct children of a merge element.-->
+
+        <!--<include-->
+        <!--layout="@layout/view_basic_usage_inner_error"-->
+        <!--bind:user="@{user}"/>-->
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{@string/nameFormat(user.firstName, user.lastName)}"/>
+
+    </LinearLayout>
 
 </layout>

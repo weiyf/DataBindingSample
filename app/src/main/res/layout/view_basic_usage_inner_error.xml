@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--此layout是演示不支持merge标签作为跟布局使用-->
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="user"
+            type="cn.weiyf.databindingsample.entity.User"/>
+    </data>
+
+    <!--此TextView只是为了运行不报错添加的，无实际意义-->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <!--<merge>-->
+
+    <!--<include-->
+    <!--layout="@layout/view_basic_usage_inner"-->
+    <!--bind:user="@{user}"/>-->
+    <!--</merge>-->
+</layout>
